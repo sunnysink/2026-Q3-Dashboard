@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q3 Forge 2026</title>
+  <meta name="description" content="Q3 2026 CEO Dashboard — Soul-Forged Founders">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --charcoal: #1a1614;
+      --charcoal-card: #252120;
+      --gold: #d4a24e;
+      --gold-dim: #b8893f;
+      --ember: #c96f2f;
+      --cream: #f2e9dc;
+      --cream-muted: #c4b8a8;
+      --muted-red: #943b3b;
+      --sage: #7a8c6e;
+      --card-border: rgba(212, 162, 78, 0.15);
+      --card-bg: rgba(37, 33, 32, 0.85);
+    }
+
+    body {
+      background-color: var(--charcoal);
+      color: var(--cream);
+      font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout ── */
+
+    .dashboard {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+    }
+
+    /* ── Header ── */
+
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .header::after {
+      content: '';
+      display: block;
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 28px auto 0;
+    }
+
+    .header-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: 0.03em;
+      line-height: 1.15;
+    }
+
+    .header-quarter {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .header-intention {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--cream-muted);
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+
+    /* ── Yes / No Banner ── */
+
+    .banner-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 52px;
+    }
+
+    .banner-card {
+      padding: 28px 24px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .banner-yes {
+      background: linear-gradient(135deg, rgba(212, 162, 78, 0.12), rgba(201, 111, 47, 0.08));
+      border: 1.5px solid rgba(212, 162, 78, 0.35);
+      box-shadow:
+        0 0 30px rgba(212, 162, 78, 0.08),
+        0 0 60px rgba(212, 162, 78, 0.04),
+        inset 0 1px 0 rgba(212, 162, 78, 0.1);
+    }
+
+    .banner-no {
+      background: linear-gradient(135deg, rgba(148, 59, 59, 0.1), rgba(122, 46, 46, 0.06));
+      border: 1.5px solid rgba(148, 59, 59, 0.3);
+    }
+
+    .banner-label {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .banner-yes .banner-label { color: var(--gold); }
+    .banner-no .banner-label  { color: var(--muted-red); }
+
+    .banner-text {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .banner-yes .banner-text { color: var(--cream); }
+    .banner-no .banner-text  { color: var(--cream-muted); }
+
+    /* ── Progress ── */
+
+    .progress-section {
+      margin-bottom: 52px;
+      text-align: center;
+    }
+
+    .progress-bar-track {
+      width: 100%;
+      height: 6px;
+      background: var(--charcoal-card);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 12px;
+      border: 1px solid rgba(212, 162, 78, 0.1);
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--ember), var(--gold));
+      border-radius: 3px;
+      transition: width 0.5s ease;
+      width: 0%;
+    }
+
+    .progress-label {
+      font-size: 0.8rem;
+      color: var(--cream-muted);
+      margin-top: 8px;
+    }
+
+    .progress-count {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ── Section Heading ── */
+
+    .section-heading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+
+    .section-subline {
+      font-size: 0.8rem;
+      color: var(--cream-muted);
+      font-style: italic;
+      margin-bottom: 28px;
+    }
+
+    /* ── Priority Cards ── */
+
+    .priorities {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+
+    .priority-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 28px 28px 24px;
+      backdrop-filter: blur(6px);
+      transition: border-color 0.3s ease;
+    }
+
+    .priority-card:hover {
+      border-color: rgba(212, 162, 78, 0.3);
+    }
+
+    .priority-number {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ember);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .priority-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    .action-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .action-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .action-item input[type="checkbox"] { display: none; }
+
+    .checkbox-visual {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border: 1.5px solid var(--gold-dim);
+      border-radius: 4px;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      background: transparent;
+    }
+
+    .checkbox-visual svg {
+      width: 12px;
+      height: 12px;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.25s ease;
+    }
+
+    .action-item.checked .checkbox-visual {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .action-item.checked .checkbox-visual svg {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .action-item.checked .action-text {
+      color: var(--cream-muted);
+      text-decoration: line-through;
+      text-decoration-color: rgba(196, 184, 168, 0.4);
+    }
+
+    .action-text {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--cream);
+      transition: color 0.25s ease;
+    }
+
+    /* ── Footer ── */
+
+    .footer-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(212, 162, 78, 0.1);
+    }
+
+    .footer-card { padding: 20px; }
+
+    .footer-label {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .footer-keeping .footer-label     { color: var(--sage); }
+    .footer-setting-down .footer-label { color: var(--cream-muted); }
+
+    .footer-text {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--cream-muted);
+    }
+
+    .footer-keeping .footer-text { color: var(--cream); }
+
+    /* ── Responsive ── */
+
+    @media (max-width: 640px) {
+      .dashboard        { padding: 32px 16px 48px; }
+      .header-name      { font-size: 2.2rem; }
+      .header-intention { font-size: 1.15rem; }
+      .banner-row       { grid-template-columns: 1fr; gap: 14px; }
+      .footer-row       { grid-template-columns: 1fr; gap: 14px; }
+      .priority-card    { padding: 22px 20px 20px; }
+      .banner-text      { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard">
+
+    <!-- Header -->
+    <header class="header">
+      <h1 class="header-name">Q3 Forge</h1>
+      <p class="header-quarter">2026</p>
+      <p class="header-intention">
+        The systems I build today create the freedom I'll have tomorrow.<br>
+        Investment in infrastructure will let my business grow sustainably.
+      </p>
+    </header>
+
+    <!-- Yes / No Banner -->
+    <div class="banner-row">
+      <div class="banner-card banner-yes">
+        <div class="banner-label">✦ My Full-Body Yes</div>
+        <div class="banner-text">Committing to the Soul-Forged Founders ecosystem</div>
+      </div>
+      <div class="banner-card banner-no">
+        <div class="banner-label">✕ My Firm No</div>
+        <div class="banner-text">Creating more content when strong content exists</div>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-section">
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
+      <p class="progress-label">
+        <span class="progress-count" id="progressText">0 of 9</span> action steps complete
+      </p>
+    </div>
+
+    <!-- Priorities -->
+    <h2 class="section-heading">Q3 Priorities</h2>
+    <p class="section-subline">Drafted by Claude, edited by me.</p>
+
+    <div class="priorities">
+
+      <!-- Priority 1 -->
+      <div class="priority-card">
+        <div class="priority-number">Priority One</div>
+        <div class="priority-title">Publish 1+ YouTube Videos Per Week</div>
+        <ul class="action-list">
+          <li class="action-item" data-key="p1a1">
+            <input type="checkbox" id="p1a1">
+            <div class="checkbox-visual">
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#1a1614" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="action-text">Pull your 4 highest-engagement SFF posts from Q2 and turn each one into a YouTube script outline this week — repurpose, don't reinvent</span>
+          </li>
+          <li class="action-item" data-key="p1a2">
+            <input type="checkbox" id="p1a2">
+            <div class="checkbox-visual">
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#1a1614" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="action-text">Film and publish your first video by Sunday: a screen-share walkthrough of you using Claude to write a client-calling offer description for a tarot reader</span>
+          </li>
+          <li class="action-item" data-key="p1a3">
+            <input type="checkbox" id="p1a3">
+            <div class="checkbox-visual">
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#1a1614" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="action-text">Block one recurring "Film Day" on your calendar — same day, same time — so publishing is a rhythm, not a weekly negotiation with yourself</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Priority 2 -->
+      <div class="priority-card">
+        <div class="priority-number">Priority Two</div>
+        <div class="priority-title">Test Ascension Levers in SFF</div>
+        <ul class="action-list">
+          <li class="action-item" data-key="p2a1">
+            <input type="checkbox" id="p2a1">
+            <div class="checkbox-visual">
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#1a1614" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="action-text">Identify your 5 most active Standard members this month and send each a personal DM inviting them to try Premium with a specific reason why it fits what they're working on</span>
+          </li>
+          <li class="action-item" data-key="p2a2">
+            <input type="checkbox" id="p2a2">
+            <div class="checkbox-visual">
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#1a1614" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="action-text">Run a one-week "Premium Preview" series in the Standard feed — one post per day showcasing a Premium resource or member win that Standard can't access yet</span>
+          </li>
+          <li class="action-item" data-key="p2a3">
+            <input type="checkbox" id="p2a3">
+            <div class="checkbox-visual">
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#1a1614" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="action-text">Design one time-limited upgrade offer (first month of Premium at Standard price) with a clear deadline, run it, and track conversion rate as your baseline metric</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Priority 3 -->
+      <div class="priority-card">
+        <div class="priority-number">Priority Three</div>
+        <div class="priority-title">SFF Positioning Testing</div>
+        <ul class="action-list">
+          <li class="action-item" data-key="p3a1">
+            <input type="checkbox" id="p3a1">
+            <div class="checkbox-visual">
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#1a1614" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="action-text">Round 1 — Visual angles: create a series of ad creatives for the SFF about page testing different visual angles in a CBO campaign, run for ~5 days, and pick the winner by where Meta allocates the most spend and highest reach (conversions are a bonus signal, not the primary metric)</span>
+          </li>
+          <li class="action-item" data-key="p3a2">
+            <input type="checkbox" id="p3a2">
+            <div class="checkbox-visual">
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#1a1614" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="action-text">Round 2 — Copy angles: take the winning image and pair it with a series of different about page copy variations in a CBO campaign, run for ~5 days, and let spend allocation and reach tell you which message lands</span>
+          </li>
+          <li class="action-item" data-key="p3a3">
+            <input type="checkbox" id="p3a3">
+            <div class="checkbox-visual">
+              <svg viewBox="0 0 12 12" fill="none"><path d="M2.5 6L5 8.5L9.5 3.5" stroke="#1a1614" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="action-text">Make this a recurring practice: add a monthly "Positioning Testing Round" to your calendar — visual angles first, copy angles second — so your ads stay aligned with what people actually care about right now</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-row">
+      <div class="footer-card footer-keeping">
+        <div class="footer-label">✦ Keeping from Q2</div>
+        <div class="footer-text">Transformation Visibility — continuing to show and share what I'm doing in my business</div>
+      </div>
+      <div class="footer-card footer-setting-down">
+        <div class="footer-label">Setting Down</div>
+        <div class="footer-text">Creating more content when strong content exists</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      var STORAGE_KEY = 'q3-forge-2026';
+
+      function loadState() {
+        try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+        catch (e) { return {}; }
+      }
+
+      function saveState(state) {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+        catch (e) { /* silent */ }
+      }
+
+      function updateProgress() {
+        var total   = document.querySelectorAll('.action-item').length;
+        var checked = document.querySelectorAll('.action-item.checked').length;
+        var pct     = total > 0 ? Math.round((checked / total) * 100) : 0;
+        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('progressText').textContent = checked + ' of ' + total;
+      }
+
+      var state = loadState();
+      var items = document.querySelectorAll('.action-item');
+
+      items.forEach(function (item) {
+        var key = item.getAttribute('data-key');
+        var cb  = item.querySelector('input[type="checkbox"]');
+
+        if (state[key]) {
+          item.classList.add('checked');
+          cb.checked = true;
+        }
+
+        item.addEventListener('click', function () {
+          var isChecked = item.classList.toggle('checked');
+          cb.checked = isChecked;
+          var current = loadState();
+          if (isChecked) { current[key] = true; } else { delete current[key]; }
+          saveState(current);
+          updateProgress();
+        });
+      });
+
+      updateProgress();
+    })();
+  </script>
+
+</body>
+</html>
